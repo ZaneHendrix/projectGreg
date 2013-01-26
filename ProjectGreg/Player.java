@@ -25,7 +25,7 @@ public class Player {
 	double friction = 1;
 	double minimalFriction = .0001;
 	double acceleration = 2.7864;
-	double jump = 4;
+	double jump = -4;
 	double gravity = 2; 
 	
 	Texture texture;
