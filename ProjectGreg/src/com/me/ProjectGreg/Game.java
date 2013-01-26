@@ -1,10 +1,8 @@
 package com.me.ProjectGreg;
 
 //import com.me.projectgreg.*;
-import java.util.TimerTask;
 import java.util.Timer;
-
-import com.me.ProjectGreg.Heartbeat;
+import java.util.TimerTask;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
@@ -15,6 +13,7 @@ import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.me.ProjectGreg.Heartbeat;
 
 public class Game implements ApplicationListener 
 {
@@ -26,19 +25,23 @@ public class Game implements ApplicationListener
 			Heartbeat.INSTANCE().calmDown();
 		}
 	}
+	
 	private OrthographicCamera camera;
 	SpriteBatch batch;
+	SpriteBatch playerBatch;
 	private Texture texture;
 	private Sprite sprite;
+	private Sprite playerSprite;
+	private Texture playerTexture;
 	private Platform []level;
 	private Player player;
+	
 	@Override
-	public void create() 
-	{		
+	public void create() {		
 		float w = Gdx.graphics.getWidth();
 		float h = Gdx.graphics.getHeight();
-		player = new Player(200,200);
 		level = new Platform[1];
+		player = new Player(200, 100);
 		for(int i = 0; i<level.length; i++)
 		{
 			level[i] = new Platform(this);
@@ -46,16 +49,20 @@ public class Game implements ApplicationListener
 		
 		camera = new OrthographicCamera(w, h);
 		batch = new SpriteBatch();
-		
+		playerBatch = new SpriteBatch();
+		playerTexture = new Texture(Gdx.files.internal("data/Greg.png"));
 		texture = new Texture(Gdx.files.internal("data/platform.png"));
 		texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
-		TextureRegion region = new TextureRegion(texture, 0, 0, 512, 275);
-		
-		sprite = new Sprite(region);
+		TextureRegion playerRegion = new TextureRegion(playerTexture, 0, 0, 64, 64);
+		//TextureRegion region = new TextureRegion(texture, (int)player.getX(), (int)player.getY(), 64, 64);
+		playerSprite = new Sprite(playerRegion);
+		playerSprite.setSize(64,64);
+		player.setSprite(playerSprite);
+		/*sprite = new Sprite(region);
 		sprite.setSize(0.9f, 0.9f * sprite.getHeight() / sprite.getWidth());
 		sprite.setOrigin(sprite.getWidth()/2, sprite.getHeight()/2);
-		sprite.setPosition(-sprite.getWidth()/2, -sprite.getHeight()/2);
+		sprite.setPosition(-sprite.getWidth()/2, -sprite.getHeight()/2);*/
 		
 		Task heartRateTask = new Task();
 		Timer heartTimer = new Timer();
@@ -64,35 +71,29 @@ public class Game implements ApplicationListener
 	}
 
 	@Override
-	public void dispose() 
-	{
+	public void dispose() {
 		batch.dispose();
 		texture.dispose();
+		playerTexture.dispose();
 	}
 
 	@Override
-	public void render() 
-	{
-		for(int i = 0; i < level.length; i++)
-		{
-			//If player isn't touching platform 
-			/*if(!player.sprite.getBoundingRectangle().overlaps(level[i].sprite.getBoundingRectangle()))
-			{
-				//Player affected by Gravity
-			}*/
-		}
+	public void render() {		
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		//camera.translate(.01f,0f);
 		batch.setProjectionMatrix(camera.combined);
-		player.update();
-		batch.begin();
-		for(Platform plat : level)
-	{
-			plat.sprite().draw(batch);
-	}
 		
-		batch.end();
+		playerBatch.begin();
+		//batch.begin();
+		//System.out.println(level[0].sprite()!=null);
+		player.sprite().draw(batch);
+		player.update();
+		player.sprite().setPosition((float)player.getX(), (float)player.getY());
+		level[0].sprite().draw(batch);
+		//sprite.draw(batch);
+		playerBatch.end();
+		//batch.end();
 	}
 
 	@Override

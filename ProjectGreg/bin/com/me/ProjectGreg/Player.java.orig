@@ -37,7 +37,7 @@ public class Player {
 	}
 	public void update()
 	{
-		up = Gdx.input.isKeyPressed(Keys.W) || Gdx.input.isKeyPressed(Keys.UP) || Gdx.input.isKeyPressed(Keys.SPACE);
+		up = Gdx.input.isKeyPressed(Keys.W) || Gdx.input.isKeyPressed(Keys.UP);
 		left = Gdx.input.isKeyPressed(Keys.A) || Gdx.input.isKeyPressed(Keys.LEFT);
 		down = Gdx.input.isKeyPressed(Keys.S) || Gdx.input.isKeyPressed(Keys.DOWN);
 		right = Gdx.input.isKeyPressed(Keys.D) || Gdx.input.isKeyPressed(Keys.RIGHT);
@@ -46,18 +46,15 @@ public class Player {
 		{
 			if(currentXSpeed < 0)
 			{
-				if(currentXSpeed < (-1 * friction))
-					currentXSpeed += friction;
+				if(currentXSpeed > .5)
+					currentXSpeed += minimalFriction;
 				else
-					currentXSpeed = 0;
-					//currentXSpeed += friction;
-					
+					currentXSpeed += friction;
 			}
 			else
 			{
 				if(currentXSpeed < .5)
-					currentXSpeed = 0;
-					//currentXSpeed -= minimalFriction;
+					currentXSpeed -= minimalFriction;
 				else
 					currentXSpeed -= friction;
 			}
@@ -90,7 +87,6 @@ public class Player {
 		}
 		setX(xPos + currentXSpeed);
 		setY(yPos + currentYSpeed);
-		System.out.println("xPos: " + xPos + "\tyPos: "+ yPos);
 		
 	
 	}
@@ -110,13 +106,5 @@ public class Player {
 	{
 		return yPos;
 	}
-	public void setSprite(Sprite s)
-	{
-		sprite = s;
-	}
-	public Sprite sprite()
-	{
-		return sprite;
-	}
-	//public void draw()
+	
 }
