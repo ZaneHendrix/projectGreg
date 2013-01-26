@@ -10,14 +10,16 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-public class Game implements ApplicationListener {
+public class Game implements ApplicationListener 
+{
 	private OrthographicCamera camera;
 	private SpriteBatch batch;
 	private Texture texture;
 	private Sprite sprite;
 	
 	@Override
-	public void create() {		
+	public void create() 
+	{		
 		float w = Gdx.graphics.getWidth();
 		float h = Gdx.graphics.getHeight();
 		
@@ -36,13 +38,15 @@ public class Game implements ApplicationListener {
 	}
 
 	@Override
-	public void dispose() {
+	public void dispose()
+	{
 		batch.dispose();
 		texture.dispose();
 	}
 
 	@Override
-	public void render() {		
+	public void render() 
+	{		
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		
@@ -53,14 +57,18 @@ public class Game implements ApplicationListener {
 	}
 
 	@Override
-	public void resize(int width, int height) {
+	public void resize(int width, int height) 
+	{
+		
 	}
 
 	@Override
-	public void pause() {
+	public void pause() 
+	{
 	}
 
 	@Override
-	public void resume() {
+	public void resume() 
+	{
 	}
 }
