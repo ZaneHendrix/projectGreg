@@ -6,12 +6,12 @@ import java.io.*;
 public class Loader 
 {
 	Platform[][] levels;
-	
+
 	public Loader() 
 	{
 		load();
 	}
-	
+
 	public void load()
 	{
 		try
@@ -41,12 +41,11 @@ public class Loader
 		{
 		}
 	}
-	
+
 	public Platform[] nextLevel() 
 	{
 		int random = (int)Math.random()*levels.length;
 		return null;
 	}
-			
-}
 
+}

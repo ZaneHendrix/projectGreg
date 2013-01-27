@@ -25,21 +25,21 @@ public class Platform {
 	
 	Game game;
 	
-	public Platform(int x, int y)
-	{
-		texture = new Texture(Gdx.files.internal("data/platform.png"));
-		sprite = new Sprite(new TextureRegion(texture, 0,0,64,64));
-		sprite.setPosition((float)x*64f,(float)y*64f);
-	}
-	
 	public Platform(Game g)
 	{
 		texture = new Texture(Gdx.files.internal("data/platform.png"));
 		sprite = new Sprite(new TextureRegion(texture, 0,0,64,64));
 		sprite.setPosition(10f,100f);
 		//sprite.setSize(1f,1f);
-		game=g;
-		
+		game=g;		
+	}
+	public Platform(int x, int y)
+	{
+		texture = new Texture(Gdx.files.internal("data/platform.png"));
+		sprite = new Sprite(new TextureRegion(texture, 0,0,64,64));
+		xPos = x;
+		yPos = y;
+		sprite.setPosition(xPos,yPos);
 	}
 	
 	public void setPosition(int x, int y)

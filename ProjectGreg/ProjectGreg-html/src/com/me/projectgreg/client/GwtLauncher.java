@@ -1,6 +1,6 @@
-package com.me.projectgreg.client;
+package com.me.ProjectGreg.client;
 
-import com.me.projectgreg.MyGdxGame;
+import com.me.ProjectGreg.MyGdxGame;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.gwt.GwtApplication;
 import com.badlogic.gdx.backends.gwt.GwtApplicationConfiguration;

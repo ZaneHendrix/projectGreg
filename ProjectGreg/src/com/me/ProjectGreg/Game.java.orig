@@ -1,6 +1,6 @@
 package com.me.ProjectGreg;
 
-//import com.me.projectgreg.*;
+//import com.me.ProjectGreg.*;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -22,7 +22,7 @@ public class Game implements ApplicationListener {
 		@Override
 		public void run()
 		{
-			Heartbeat.INSTANCE().calmDown();
+			HeartheartBeat.INSTANCE().calmDown();
 		}
 	}
 	public static OrthographicCamera camera;

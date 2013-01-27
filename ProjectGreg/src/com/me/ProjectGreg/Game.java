@@ -1,6 +1,6 @@
 package com.me.ProjectGreg;
 
-//import com.me.projectgreg.*;
+//import com.me.ProjectGreg.*;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -14,7 +14,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
-import com.me.ProjectGreg.Heartbeat;
+import com.me.ProjectGreg.HeartBeat;
 
 public class Game implements ApplicationListener 
 {
@@ -23,7 +23,7 @@ public class Game implements ApplicationListener
 		@Override
 		public void run()
 		{
-			Heartbeat.INSTANCE().calmDown();
+			HeartBeat.INSTANCE().calmDown();
 		}
 	}
 
@@ -39,21 +39,24 @@ public class Game implements ApplicationListener
 	private Rectangle rect;
 
 	@Override
-	public void create() {		
+	public void create() 
+	{
 		float w = Gdx.graphics.getWidth();
 		float h = Gdx.graphics.getHeight();
-		level = new Platform[1];
+		//level = new Platform[1];
 		player = new Player(200, 100);
-		for(int i = 0; i<level.length; i++)
+		/*for(int i = 0; i<level.length; i++)
 		{
 			level[i] = new Platform(this);
-		}
+		}*/
 		camera = new OrthographicCamera(w, h);
 		batch = new SpriteBatch();
-		playerBatch = new SpriteBatch();
+		//playerBatch = new SpriteBatch();
 		playerTexture = new Texture(Gdx.files.internal("data/Greg.png"));
 		texture = new Texture(Gdx.files.internal("data/platform.png"));
 		texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+
+		level = new Level("").getTiles();
 
 		TextureRegion playerRegion = new TextureRegion(playerTexture, 0, 0, 64, 64);
 		TextureRegion region = new TextureRegion(texture, 100, 150, 512, 275);
@@ -66,26 +69,27 @@ public class Game implements ApplicationListener
 		sprite.setOrigin(sprite.getWidth()/2, sprite.getHeight()/2);
 		sprite.setPosition(-sprite.getWidth()/2, -sprite.getHeight()/2);
 
-		Task heartRateTask = new Task();
-		Timer heartTimer = new Timer();
+		Task RateTask = new Task();
+		Timer Timer = new Timer();
 
-		heartTimer.schedule(heartRateTask, 0, 500); // Update simulation about 1 times per second.
+		Timer.schedule(RateTask, 0, 500); // Update simulation about 1 times per second.
 	}
 
 	@Override
-	public void dispose() {
+	public void dispose()
+	{
 		batch.dispose();
 		texture.dispose();
 		playerTexture.dispose();
 	}
 
 	@Override
-	public void render() {		
+	public void render() 
+	{		
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		//camera.translate(.01f,0f);
 		batch.setProjectionMatrix(camera.combined);
-
 		//playerBatch.begin();
 		batch.begin();
 		//System.out.println(level[0].sprite()!=null);
@@ -94,32 +98,36 @@ public class Game implements ApplicationListener
 		collision(player, level);
 		player.sprite().setPosition((float)player.getX(), (float)player.getY());
 		batch.end();
+		for(Platform p: level)
+		{
 		batch.begin();
-		level[0].sprite().draw(batch);
-		//sprite.draw(batch);
-		//playerBatch.end();
+		p.sprite().draw(batch);
 		batch.end();
+		}
 		
-		camera.position.set(player.getX(), player.getY(), 0);
+		camera.position.set((float)player.getX(), (float)player.getY(), 0f);
 		camera.update();
 	}
 
 	@Override
-	public void resize(int width, int height) {
+	public void resize(int width, int height)
+	{
 	}
 
 	@Override
-	public void pause() {
+	public void pause()
+	{
 	}
 
 	@Override
-	public void resume() {
+	public void resume()
+	{
 	}
 	
 	
-		static Rectangle xRect = new Rectangle();
-		static Rectangle yRect = new Rectangle();
-		public static void collision(Player p, Platform[] level){
+	static Rectangle xRect = new Rectangle();
+	static Rectangle yRect = new Rectangle();
+	public static void collision(Player p, Platform[] level){
 	      float x, y, width, height, xSpeed, ySpeed;
 	      x = (float)p.getX();
 	      y = (float)p.getY();

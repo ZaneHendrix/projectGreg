@@ -68,7 +68,7 @@ public class Player {
 		
 		if(up == true) 
 		{
-			Heartbeat.INSTANCE().speedUP(5);
+			HeartheartBeat.INSTANCE().speedUP(5);
 			System.out.println("W");
 			currentYSpeed -= jump; 
 			Game.camera.translate((float)currentXSpeed, (float)currentYSpeed);
@@ -76,7 +76,7 @@ public class Player {
 		}
 		if(left == true)
 		{
-			Heartbeat.INSTANCE().speedUP(1);
+			HeartheartBeat.INSTANCE().speedUP(1);
 			System.out.println("A");
 			if((currentXSpeed - acceleration) < minSpeed)
 				currentXSpeed = minSpeed;
@@ -85,7 +85,7 @@ public class Player {
 		}
 		if(right == true)
 		{
-			Heartbeat.INSTANCE().speedUP(1);
+			HeartheartBeat.INSTANCE().speedUP(1);
 			System.out.println("D");
 			if((currentXSpeed + acceleration) > maxSpeed)
 				currentXSpeed = maxSpeed;

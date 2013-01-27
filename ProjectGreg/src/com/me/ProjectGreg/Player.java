@@ -1,4 +1,3 @@
-
 package com.me.ProjectGreg;
 
 import com.badlogic.gdx.ApplicationListener;
@@ -16,13 +15,13 @@ import com.badlogic.gdx.Input.*;
 
 public class Player {
 
-	float xPos;
-	float yPos;
+	double xPos;
+	double yPos;
 	boolean up = false,left = false,down = false,right = false;
 	int maxSpeed = 10;
 	int minSpeed = -10;
-	float currentXSpeed = 0;
-	float currentYSpeed = 0;
+	double currentXSpeed = 0;
+	double currentYSpeed = 0;
 	double friction = 1;
 	double minimalFriction = .0001;
 	double acceleration = 2.7864;
@@ -69,14 +68,14 @@ public class Player {
 
 		if(up == true && canJump)
 		{
-			Heartbeat.INSTANCE().speedUP(5);
+			HeartBeat.INSTANCE().speedUP(.05f);
 			System.out.println("TRUE");
 			currentYSpeed -= jump;
 			canJump = false;
 		}
 		if(left == true)
 		{
-			Heartbeat.INSTANCE().speedUP(1);
+			HeartBeat.INSTANCE().speedUP(.001f);
 			//System.out.println("A");
 			if((currentXSpeed - acceleration) < minSpeed)
 				currentXSpeed = minSpeed;
@@ -85,16 +84,16 @@ public class Player {
 		}
 		if(right == true)
 		{
-			Heartbeat.INSTANCE().speedUP(1);
+			HeartBeat.INSTANCE().speedUP(.001f);
 			//System.out.println("D");
 			if((currentXSpeed + acceleration) > maxSpeed)
 				currentXSpeed = maxSpeed;
 			else
 				currentXSpeed += acceleration;
 		}
-		setX((float)(xPos + currentXSpeed));
-		setY((float)(yPos + currentYSpeed));
-		System.out.println("xPos: " + xPos + "\tyPos: "+ yPos + "\tySpeed: " + currentYSpeed);
+		setX(xPos + currentXSpeed);
+		setY(yPos + currentYSpeed);
+		//System.out.println("xPos: " + xPos + "\tyPos: "+ yPos + "\tySpeed: " + currentYSpeed);
 
 
 	}
@@ -102,35 +101,35 @@ public class Player {
 	{
 		canJump = j;
 	}
-	public void setX(float x)
+	public void setX(double x)
 	{
 		xPos = x;
 	}
-	public void setY(float y)
+	public void setY(double y)
 	{
 		yPos = y;
 	}
-	public float  getX()
+	public double getX()
 	{
 		return xPos;
 	}
-	public float getY()
+	public double getY()
 	{
 		return yPos;
 	}
-	public float getCurrentYSpeed()
+	public double getCurrentYSpeed()
 	{
 		return currentYSpeed;
 	}
-	public void setCurrentYSpeed(float y)
+	public void setCurrentYSpeed(double y)
 	{
 	  currentYSpeed = y ;
 	} 
-	public float getCurrentXSpeed()
+	public double getCurrentXSpeed()
 	{
 		return currentXSpeed;
 	}
-	public void setCurrentXSpeed(float x)
+	public void setCurrentXSpeed(double x)
 	{
 		currentXSpeed = x;
 	}
@@ -144,4 +143,3 @@ public class Player {
 	}
 	//public void draw()
 }
-

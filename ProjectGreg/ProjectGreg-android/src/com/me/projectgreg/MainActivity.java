@@ -1,4 +1,4 @@
-package com.me.projectgreg;
+package com.me.ProjectGreg;
 
 import android.os.Bundle;
 
