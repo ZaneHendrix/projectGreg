@@ -1,3 +1,4 @@
+
 package com.me.ProjectGreg;
 
 import com.badlogic.gdx.ApplicationListener;
@@ -9,14 +10,15 @@ import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.*;
 
 
 public class Player {
 
-	double xPos;
-	double yPos;
+	float xPos;
+	float yPos;
 	boolean up = false,left = false,down = false,right = false;
 	int maxSpeed = 10;
 	int minSpeed = -10;
@@ -37,7 +39,7 @@ public class Player {
 	}
 	public void update()
 	{
-		up = Gdx.input.isKeyPressed(Keys.W) || Gdx.input.isKeyPressed(Keys.UP);
+		up = Gdx.input.isKeyPressed(Keys.W) || Gdx.input.isKeyPressed(Keys.UP) || Gdx.input.isKeyPressed(Keys.SPACE);
 		left = Gdx.input.isKeyPressed(Keys.A) || Gdx.input.isKeyPressed(Keys.LEFT);
 		down = Gdx.input.isKeyPressed(Keys.S) || Gdx.input.isKeyPressed(Keys.DOWN);
 		right = Gdx.input.isKeyPressed(Keys.D) || Gdx.input.isKeyPressed(Keys.RIGHT);
@@ -46,26 +48,31 @@ public class Player {
 		{
 			if(currentXSpeed < 0)
 			{
-				if(currentXSpeed > .5)
-					currentXSpeed += minimalFriction;
-				else
+				if(currentXSpeed < (-1 * friction))
 					currentXSpeed += friction;
+				else
+					currentXSpeed = 0;
+					//currentXSpeed += friction;
+					
 			}
 			else
 			{
 				if(currentXSpeed < .5)
-					currentXSpeed -= minimalFriction;
+					currentXSpeed = 0;
+					//currentXSpeed -= minimalFriction;
 				else
 					currentXSpeed -= friction;
 			}
 		}
 			
 		
-		if(up == true)
+		if(up == true) 
 		{
-			Heartbeat.INSTANCE().speedUP(1);
+			Heartbeat.INSTANCE().speedUP(5);
 			System.out.println("W");
 			currentYSpeed -= jump; 
+			Game.camera.translate((float)currentXSpeed, (float)currentYSpeed);
+			Game.camera.update();
 		}
 		if(left == true)
 		{
@@ -85,26 +92,36 @@ public class Player {
 			else
 				currentXSpeed += acceleration;
 		}
-		setX(xPos + currentXSpeed);
-		setY(yPos + currentYSpeed);
+		setX((float)( xPos + currentXSpeed));
+		setY((float)( yPos + currentYSpeed));
+		System.out.println("xPos: " + xPos + "\tyPos: "+ yPos);
 		
 	
 	}
-	public void setX(double x)
+	public void setX(float x)
 	{
 		xPos = x;
 	}
-	public void setY(double y)
+	public void setY(float y)
 	{
 		yPos = y;
 	}
-	public double getX()
+	public float  getX()
 	{
 		return xPos;
 	}
-	public double getY()
+	public float getY()
 	{
 		return yPos;
 	}
-	
+	public void setSprite(Sprite s)
+	{
+		sprite = s;
+	}
+	public Sprite sprite()
+	{
+		return sprite;
+	}
+	//public void draw()
 }
+
