@@ -10,14 +10,15 @@ import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.*;
 
 
 public class Player {
 
-	double xPos;
-	double yPos;
+	float xPos;
+	float yPos;
 	boolean up = false,left = false,down = false,right = false;
 	int maxSpeed = 10;
 	int minSpeed = -10;
@@ -65,11 +66,13 @@ public class Player {
 		}
 			
 		
-		if(up == true)
+		if(up == true) 
 		{
-			Heartbeat.INSTANCE().speedUP(1);
+			Heartbeat.INSTANCE().speedUP(5);
 			System.out.println("W");
 			currentYSpeed -= jump; 
+			Game.camera.translate((float)currentXSpeed, (float)currentYSpeed);
+			Game.camera.update();
 		}
 		if(left == true)
 		{
@@ -89,25 +92,25 @@ public class Player {
 			else
 				currentXSpeed += acceleration;
 		}
-		setX(xPos + currentXSpeed);
-		setY(yPos + currentYSpeed);
+		setX((float)( xPos + currentXSpeed));
+		setY((float)( yPos + currentYSpeed));
 		System.out.println("xPos: " + xPos + "\tyPos: "+ yPos);
 		
 	
 	}
-	public void setX(double x)
+	public void setX(float x)
 	{
 		xPos = x;
 	}
-	public void setY(double y)
+	public void setY(float y)
 	{
 		yPos = y;
 	}
-	public double getX()
+	public float  getX()
 	{
 		return xPos;
 	}
-	public double getY()
+	public float getY()
 	{
 		return yPos;
 	}
@@ -121,4 +124,4 @@ public class Player {
 	}
 	//public void draw()
 }
->>>>>>> c57fdc2e330942eaf2f6e49fe0fb761c41b3ae36:ProjectGreg/src/com/me/ProjectGreg/Player.java
+

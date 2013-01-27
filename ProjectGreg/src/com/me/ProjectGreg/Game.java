@@ -1,6 +1,10 @@
-package com.me.projectgreg;
+package com.me.ProjectGreg;
 
 //import com.me.projectgreg.*;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import   com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
@@ -21,7 +25,7 @@ public class Game implements ApplicationListener {
 			Heartbeat.INSTANCE().calmDown();
 		}
 	}
-	private OrthographicCamera camera;
+	public static OrthographicCamera camera;
 	SpriteBatch batch;
 	SpriteBatch playerBatch;
 	private Texture texture;
@@ -32,7 +36,11 @@ public class Game implements ApplicationListener {
 	private Player player;
 	
 	@Override
-	public void create() {		
+	public void create() 
+	{		
+		Timer heartTimer = new Timer();
+		Task heartRateTask = new Task();
+		
 		float w = Gdx.graphics.getWidth();
 		float h = Gdx.graphics.getHeight();
 		level = new Platform[1];
@@ -57,6 +65,10 @@ public class Game implements ApplicationListener {
 		sprite.setSize(0.9f, 0.9f * sprite.getHeight() / sprite.getWidth());
 		sprite.setOrigin(sprite.getWidth()/2, sprite.getHeight()/2);
 		sprite.setPosition(-sprite.getWidth()/2, -sprite.getHeight()/2);
+		
+		
+		heartTimer.schedule(heartRateTask, 0, 1000); // Update simulation about 1 times per second.
+
 	}
 
 	@Override
@@ -78,11 +90,15 @@ public class Game implements ApplicationListener {
 		level[0].sprite().draw(batch);
 		//sprite.draw(batch);
 		batch.end();
+		playerBatch.setProjectionMatrix(camera.combined);
 		playerBatch.begin();
 		player.sprite().draw(playerBatch);
 		player.update();
 		player.sprite().setPosition((float)player.getX(), (float)player.getY());
 		playerBatch.end();
+		
+		camera.position.set(player.getX(), player.getY(), 0);
+		camera.update();
 	}
 
 	@Override
