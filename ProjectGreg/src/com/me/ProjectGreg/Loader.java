@@ -28,7 +28,7 @@ public class Loader
 					{
 						if(sc.next().charAt(0)=='p')
 						{
-							levels[q][f] = new Platform(a*64,i*64);
+							levels[q][f] = new Platform(a*64,i*64,true);
 							f++;
 						}
 					}

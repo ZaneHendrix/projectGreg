@@ -7,24 +7,24 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.*;
 import com.badlogic.gdx.files.FileHandle;
 
-public class HeartBeat 
+public class Heartbeat 
 {
-	private static HeartBeat INSTANCE = null;
-	private static Sound heartBeat;
+	private static Heartbeat INSTANCE = null;
+	private static Sound Heartbeat;
 
 
-	public static synchronized HeartBeat INSTANCE()
+	public static synchronized Heartbeat INSTANCE()
 	{
 		if (INSTANCE == null)
 		{
-			INSTANCE = new HeartBeat();
+			INSTANCE = new Heartbeat();
 		}
 		return INSTANCE;
 	}
-	private HeartBeat()
+	private Heartbeat()
 	{
-		heartBeat = Gdx.audio.newSound(Gdx.files.internal("sound/1heartBeat.wav"));
-		System.out.println("Sound " + heartBeat + " loaded");
+		Heartbeat = Gdx.audio.newSound(Gdx.files.internal("sound/1heartbeat.wav"));
+		System.out.println("Sound " + Heartbeat + " loaded");
 		timer.schedule(playBeat, 3000);
 	}
 
@@ -33,7 +33,7 @@ public class HeartBeat
 	{
 		if(rate > 0)
 		{
-			rate -= rate*.1;
+			rate -= rate*.005;
 			if(rate > 1)
 			{
 				rate = 1;
@@ -42,7 +42,7 @@ public class HeartBeat
 			{
 				rate = 0;
 			}
-			System.out.println(rate);
+			//System.out.println(rate);
 		}
 	}
 	public class PlayBeat extends TimerTask 
@@ -51,11 +51,11 @@ public class HeartBeat
 		public void run()
 		{
 			System.out.println("Playing sound");
-			heartBeat.play(1f);
+			Heartbeat.play(/*(float) (rate + 10)*/);
 			secondBeat = new SecondBeat();
-			timer.schedule(secondBeat, (long) (Math.max(200*(1 - rate), 50)));
+			timer.schedule(secondBeat, (long) (Math.max(300*((1 - rate)/2), 100)));
 			playBeat = new PlayBeat();
-			timer.schedule(playBeat, (long) (2000*(1 - rate)));
+			timer.schedule(playBeat, (long) (Math.max(2000*(1 - rate), 150)));
 		}
 	}
 	public class SecondBeat extends TimerTask
@@ -63,14 +63,14 @@ public class HeartBeat
 		@Override
 		public void run()
 		{
-			heartBeat.play(.7f);
+			Heartbeat.play (/*(float) (0.7*(rate + 10))*/);
 		}
 	}
 
 	PlayBeat playBeat = new PlayBeat();
 	SecondBeat secondBeat = new SecondBeat();
 	Timer timer = new Timer();
-	
+
 	public void speedUP(float x)
 	{
 		rate += x;
@@ -79,4 +79,8 @@ public class HeartBeat
 	{
 		return rate;
 	}	
+	public void setRate(float r)
+	{
+		rate = r;
+	}
 }
