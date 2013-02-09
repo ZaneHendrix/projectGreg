@@ -1,11 +1,5 @@
 package com.me.ProjectGreg;
 
-import java.util.*;
-import java.math.*;
-import java.io.*;
-
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
 public class Level 
 {
 	Platform[] tiles;
@@ -16,7 +10,7 @@ public class Level
 			
 			//String str = Gdx.files.internal( "data/levels.dat" ).readString();
 			////System.out.println("winner");
-			String[] scX = "1 1 1 1 1 1 1 1 1 1 1 2 2 3 3 2 4 5 1 1 1 1 1 1 1 1 1 1 1 1 1 2 3 4 3 1 2 1 1 1 1 1 1 1 1 1 1 1 1 1 2 3 4 3 1 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 3 4 3 1 2 1 2 4".split(" ");
+			String[] scX = "1 1 1 1 1 1 1 1 1 1 1 2 2 3 3 2 4 3 1 1 1 1 1 1 1 1 1 1 1 1 1 2 3 4 3 1 2 1 1 1 1 1 1 1 1 1 1 1 1 1 2 3 4 3 1 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 3 4 3 1 2 1 2 4".split(" ");
 			String[] scY = "1 1 1 1 1 1 1 1 1 1 1 -2 -4 -6 -4 -5 -4 -2 1 1 1 1 1 1 1 1 1 1 1 1 1 2 4 2 1 -3 -4 1 1 1 1 1 1 1 1 1 1 1 1 1 2 4 2 1 -3 -4 -5 1 1 1 1 1 1 1 1 1 1 1 1 1 2 4 3 1 -3 -4 -5 -7 0".split(" ");
 			tiles = new Platform [scX.length];
 			int xSum = 0;

@@ -5,7 +5,6 @@ import java.util.TimerTask;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.*;
-import com.badlogic.gdx.files.FileHandle;
 
 public class Heartbeat 
 {
@@ -33,7 +32,7 @@ public class Heartbeat
 	{
 		if(rate > 0)
 		{
-			rate -= rate*.005;
+			rate -= 0.0025; //rate*.005;
 			if(rate > 1)
 			{
 				rate = 1;

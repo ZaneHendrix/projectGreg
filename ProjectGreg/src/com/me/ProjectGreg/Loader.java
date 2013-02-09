@@ -1,7 +1,6 @@
 package com.me.ProjectGreg;
 
 import java.util.*;
-import java.math.*;
 import java.io.*;
 public class Loader 
 {
@@ -14,9 +13,10 @@ public class Loader
 
 	public void load()
 	{
+		Scanner sc = null;
 		try
 		{
-			Scanner sc = new Scanner(new File("data/levels.dat"));
+			sc = new Scanner(new File("data/levels.dat"));
 			int q =0;
 			int f = 0;
 			levels = new Platform [sc.nextInt()][];
@@ -40,11 +40,15 @@ public class Loader
 		catch(Exception E)
 		{
 		}
+		finally
+		{
+			sc.close();
+		}
 	}
 
 	public Platform[] nextLevel() 
 	{
-		int random = (int)Math.random()*levels.length;
+		//int random = (int)Math.random()*levels.length;
 		return null;
 	}
 

@@ -7,11 +7,9 @@ import java.util.Random;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -33,9 +31,6 @@ public class Game implements ApplicationListener
 	private static OrthographicCamera camera;
 	SpriteBatch batch;
 	SpriteBatch playerBatch;
-	private Texture texture;
-	private Sprite sprite;
-	private Sprite playerSprite;
 	private Texture playerTexture;
 	private Texture backgroundTexture;
 	private Texture backgroundTexture2;
@@ -45,7 +40,6 @@ public class Game implements ApplicationListener
 //	private Sprite heartMeterSprite, heartMeter2Sprite;
 	private Platform []level;
 	private Player player;
-	private Rectangle rect;
 //	private static Sound Wilhelm;
 
 
