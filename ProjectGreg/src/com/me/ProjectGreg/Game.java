@@ -58,8 +58,8 @@ public class Game implements ApplicationListener
 		//playerBatch = new SpriteBatch();
 		playerTexture = new Texture(Gdx.files.internal("data/GregIdle.png"));
         backgroundTexture = new Texture(Gdx.files.internal("data/Background1.png"));
-        backgroundTexture2 = new Texture(Gdx.files.internal("data/background2.png"));
-        backgroundTexture3 = new Texture(Gdx.files.internal("data/background3.png"));
+        backgroundTexture2 = new Texture(Gdx.files.internal("data/Background2.png"));
+        backgroundTexture3 = new Texture(Gdx.files.internal("data/Background3.png"));
         
 		level = new Level("").getTiles();
 		
